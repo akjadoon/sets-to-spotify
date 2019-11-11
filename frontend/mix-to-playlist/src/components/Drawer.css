@@ -1,0 +1,56 @@
+.Drawer {
+    width: 70%;
+    color: white;
+    background-color: black;
+    box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5) ;
+    border-radius: 10px;
+    transition: all .2s ease-in-out;
+    margin-top: 10px;
+    height:0px;
+    overflow: hidden;
+    /* height:100%;
+    z-index: 1;
+    position: fixed;
+    overflow: auto;
+    left: 0;
+    top: 0;
+    display: block */
+  }
+
+.Drawer-content{
+    width: 100%;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.save-playlist-btn {
+    width: 120px;
+    height: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    color:black;
+    background-color: white;
+    text-align: center;
+    border: 5px black 0px;
+}
+
+.btn-yes {
+    border-radius: 20px 0px 0px 20px;
+}
+
+.btn-no {
+    border-radius: 0px 20px 20px 0px;
+}
+
+.msg {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 7px 4px;
+    padding: 0;
+}
+
+@media only screen and (max-width: 800px) {
+    .Drawer {
+        width: 100%
+    }
+  }

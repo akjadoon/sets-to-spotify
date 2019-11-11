@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:700|Righteous&display=swap');
+h3 {
+  color: brown;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Lato';
+}
+
+
+.wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.log-in-btn {
+  font-size: 35px;
+  font-weight: bold;
+  color: #fff;
+  padding: 5px 40px;
+  background-color: #0c0;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+
+.log-in-btn:hover {
+  background-color: #fff;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #000;
+  transform: translateY(-7px);
+}
+
+.CardContainer {
+  display: flex;
+  justify-content: center; 
+  flex-wrap: wrap;
+  background-color: whitesmoke;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+.call-to-action {
+  color: white;
+  font-size: 50px;
+  margin: 0vh 0vw 5vh 0vw;
+  white-space: pre-wrap;
+  margin: 0px 20px 0px 20px;
+}
+
+@media only screen and (max-width: 800px) {
+    .CardContainer {
+        flex-direction: column;
+    }
+    .call-to-action{
+      font-size: 30px;
+    }
+  }
