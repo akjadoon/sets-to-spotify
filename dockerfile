@@ -1,12 +1,14 @@
 FROM python:3.6.5
 
-RUN pip install --upgrade pip
-
-ADD . /backend
+COPY ./backend /backend
 
 WORKDIR /backend
 
+RUN pip install gunicorn[gevent]
+
 RUN pip install -r requirements.txt
+
+CMD ls
 
 EXPOSE 5000
 
