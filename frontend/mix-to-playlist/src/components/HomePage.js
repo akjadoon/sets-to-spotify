@@ -1,7 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
-import Cookies from 'universal-cookie'
 import queryString from 'query-string'
 
 import './HomePage.css';
@@ -30,7 +29,7 @@ class HomePage extends React.Component {
                 queryString.parse(this.props.location.search).code,
                 {withCredentials: true})
       .then((res) => {
-        if (res.status != 200)
+        if (res.status !== 200)
           this.setState({authError: true});
       }) 
     }
@@ -62,8 +61,7 @@ class HomePage extends React.Component {
 
       const bar = (
         <div className="input-container">
-          <div style={{display: "flex", alignItems: "center", marginTop: "-25px", width: "100%",  verticalAlign:"top" }}>
-            <label for="link-input">Enter a link</label>
+          <div style={{display: "flex", marginTop: "-25px", width: "100%",  verticalAlign:"top", height: "90px" }}>
             <input id="link-input" type="text" placeholder="Paste your YouTube URL here..." onChange={this.handleInputChange}/>
             <button className="submit-btn" onClick={this.validateAndSubmit}>Submit</button>
           </div>

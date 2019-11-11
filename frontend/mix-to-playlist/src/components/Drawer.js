@@ -68,6 +68,8 @@ class Drawer extends React.Component {
                 case "dont-save-playlist":
                     drawerContent = (<p className="msg">The playlist was not created.</p>)
                     break;
+                default:
+                    drawerContent = null;
             }
 
         }

@@ -5,56 +5,58 @@
     width: 50vw;
 }
 
-
-
-
 input{
     flex: 1;
-    height: 80px;
-    padding-left: 20px;
+    padding: 0px 20px;
     border-radius: 45px 0px 0px 45px;
-    border-width: 2px;
-    border-color: grey;
-    border-style: solid;
-    
-}
+    border: 1px solid grey;    
 
-*:focus {
-    outline: none;
+    font-size: 20px;
+
 }
 
 .submit-btn {
     width: 120px;
-    height: 80px;
     margin-right: 10px;
-    font-weight: bold;
-    color: #fff;
     padding: 5px 40px 5px 20px;
     background-color: #0c0;
+
+    color: #fff;
+    font-weight: bold;
     text-align: center;
-    border: none;
+
     border-radius: 0px 45px 45px 0px;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+
+    border: none;
     outline: none;
+    font-size: 20px;
+
 }
 
 
-  button:focus {outline:0;}
+ button:focus {outline:0;}
+*:focus {
+    outline: none;
+}
 
+@media only screen and (max-width: 1200px){
+    .input-container{
+        width: 90vw;
+    }
+}
 
 @media only screen and (max-width: 800px) {
     .input-container {
-        width: 90vw
-    }
-    input {
-        height: 50px;
         font-size: 12px;
+    }
+    input{
+        font-size: 20px;
+    }
 
-    }
     .submit-btn{
-        height: 50px;
-        width: 80px;
-        font-size: 12px;
+        font-size: 20px;
+        width: 110px;
         
     }
   }

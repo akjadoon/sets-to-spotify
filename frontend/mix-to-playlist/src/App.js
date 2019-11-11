@@ -19,13 +19,6 @@ function App() {
   );
 }
 
-const divStyle = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  marginBottom: "5vh"
-};
-
 
 class LandingPage extends React.Component{
   constructor(props) {
@@ -39,7 +32,7 @@ class LandingPage extends React.Component{
   componentDidMount(){
     axios.get(process.env.REACT_APP_API_BASE_URL + '/authorize')
     .then((res) => {
-      if (res.status != 200){
+      if (res.status !== 200){
         this.setState({authError: true})
       }
       this.setState({redirect_url: res.data['redirect_url']});
@@ -53,7 +46,7 @@ class LandingPage extends React.Component{
       return <Redirect to="/auth_error"/>;
 
     const page_top = (
-    <div style={{width: "100%", height: "100%", backgroundColor: "rgba(0, 0, 0, 0.8)", display: "flex", flexDirection: "column", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+    <div style={{width: "100%", height: "100%", backgroundColor: "rgba(0, 0, 0, 0.8)", display: "flex", flexDirection: "column", justifyContent: "center"}}>
       <p className="call-to-action">
         {"Save tracks from your favorite YouTube DJ sets as Spotify Playlists"}
       </p>
