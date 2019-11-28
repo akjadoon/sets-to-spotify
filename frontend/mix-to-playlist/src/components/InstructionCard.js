@@ -6,7 +6,7 @@ const InstructionCard = (props) => {
     return(
             <div className="Card">
                 <img src={props.bgimg} alt={props.bgimg}/>
-                <div style={{padding: "0px 20px", fontSize: "25px"}}>
+                <div style={{padding: "0px 20px", fontSize: "20px"}}>
                     <p><strong>{props.text}</strong></p>
                 </div>
             </div>

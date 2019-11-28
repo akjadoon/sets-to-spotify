@@ -2,19 +2,17 @@
 .Card {
     background-color: white;
     color: black;
-    font-size: 200px;
-    width: 300px;
+    width: 250px;
     overflow-wrap: break-word;
     margin-top: -10vh;
-    font-size: 20px;
-    margin-right: 20px;
+    /* margin-right: 20px; */
     border-radius: 40px;
     box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
 }
 
 .Card img {
-    margin: 25px 0px 10px 0px;
-    height: 120px;
+    margin: 15px 0px 5px 0px;
+    height: 100px;
   }
 
 @media only screen and (max-width: 1250px) {

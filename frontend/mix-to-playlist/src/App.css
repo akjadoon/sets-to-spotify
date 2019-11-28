@@ -17,7 +17,7 @@ html, body {
 }
 
 .log-in-btn {
-  font-size: 35px;
+  font-size: 25px;
   font-weight: bold;
   color: #fff;
   background-color: #0c0;
@@ -30,7 +30,7 @@ html, body {
   grid-area: button;
   margin-top: 20px;
   padding: 10px 0px;
-  width: 500px;
+  width: 300px;
   }
 
 .log-in-btn:hover {
@@ -43,7 +43,7 @@ html, body {
 .PageContainer {
   display: grid;
   grid-template-rows: auto;
-  grid-template-columns: auto 500px auto;
+  grid-template-columns: auto 300px auto;
   grid-template-areas:
   "card card card"
   ". button .";
@@ -52,10 +52,9 @@ html, body {
 .CardContainer {
   grid-area: card;
   display: flex;
-  justify-content: center; 
-  flex-wrap: wrap;
+  justify-content: space-between; 
   background-color: whitesmoke;
-
+  width: 800px
 }
 
 .call-to-action {
@@ -70,6 +69,7 @@ html, body {
     .CardContainer {
         flex-direction: column;
         align-items: center;
+        width: auto;
     }
     .call-to-action{
       font-size: 30px;
