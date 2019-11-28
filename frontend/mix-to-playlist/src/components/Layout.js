@@ -4,7 +4,6 @@ import Header from './Header'
 
 const pageStyle = {
     height: "100%",
-    width: "100vw",
     backgroundColor: "whitesmoke",
     minHeight: "100vh",
     margin: "0", 
@@ -29,7 +28,6 @@ const Layout = (props) => (
       </div>
         {props.bottom}
     </div>
-    <div style={{ marginTop: "auto", height: "50px", paddingTop: "20px", alignSelf: "center"}}>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
   </div>
 );
 

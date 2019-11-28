@@ -46,7 +46,7 @@ class LandingPage extends React.Component{
       return <Redirect to="/auth_error"/>;
 
     const page_top = (
-    <div style={{width: "100%", height: "100%", backgroundColor: "rgba(0, 0, 0, 0.8)", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+    <div style={{width: "100%", height: "100%", backgroundColor: "rgba(0, 0, 0, 0.4)", display: "flex", flexDirection: "column", justifyContent: "center"}}>
       <p className="call-to-action">
         {"Save tracks from your favorite YouTube DJ sets as Spotify Playlists"}
       </p>
@@ -54,13 +54,14 @@ class LandingPage extends React.Component{
     );
     const page_bottom = (
       <React.Fragment>
-        <div className="CardContainer">
-          <InstructionCard text="Log in with Spotify" bgimg="spotify-white.png"/>
-          <InstructionCard text="Copy the link of a DJ set on YouTube" bgimg="video-player.png"/>
-          <InstructionCard text="Paste your link in the bar on the next page" bgimg="paste.png"/>          
-          <InstructionCard text="The tool searches for a tracklist and creates your playlist" bgimg="intelligence.png"/>
+        <div className="PageContainer">
+          <div className="CardContainer">
+            <InstructionCard text="Copy the link of a DJ set on YouTube" bgimg="youtube-logotype.png"/>
+            <InstructionCard text="Paste your link in the bar on the next page" bgimg="paste.png"/>          
+            <InstructionCard text="The tool searches for a tracklist and creates your playlist" bgimg="chip.png"/>
+          </div>
+          <button className="log-in-btn" onClick={this.redirect}>Log in with Spotify</button>
         </div>
-        <button className="log-in-btn" onClick={this.redirect}>Log in with Spotify</button>
       </React.Fragment>
     )
     return(

@@ -20,7 +20,6 @@ html, body {
   font-size: 35px;
   font-weight: bold;
   color: #fff;
-  padding: 5px 40px;
   background-color: #0c0;
   border: none;
   border-radius: 45px;
@@ -28,6 +27,10 @@ html, body {
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
+  grid-area: button;
+  margin-top: 20px;
+  padding: 10px 0px;
+  width: 500px;
   }
 
 .log-in-btn:hover {
@@ -37,13 +40,22 @@ html, body {
   transform: translateY(-7px);
 }
 
+.PageContainer {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: auto 500px auto;
+  grid-template-areas:
+  "card card card"
+  ". button .";
+}
+
 .CardContainer {
+  grid-area: card;
   display: flex;
   justify-content: center; 
   flex-wrap: wrap;
   background-color: whitesmoke;
-  margin-top: 2vh;
-  margin-bottom: 2vh;
+
 }
 
 .call-to-action {
@@ -57,8 +69,17 @@ html, body {
 @media only screen and (max-width: 800px) {
     .CardContainer {
         flex-direction: column;
+        align-items: center;
     }
     .call-to-action{
       font-size: 30px;
+    }
+    .PageContainer {
+      grid-template-areas: 
+      ". button ."
+      ". card .";
+    }
+    .log-in-btn {
+      margin-top: -5vh;
     }
   }
