@@ -12,7 +12,7 @@ const pageStyle = {
 }
 
 const pageTopStyle = {
-    height: "40vh",
+    height: "50vh",
     width:"100%",
     backgroundImage: "url(gray-turntable.jpg)",
     backgroundSize: "cover",

@@ -3,16 +3,18 @@
     flex-direction: column;
     align-items: center;
     width: 50vw;
+
 }
 
 input{
     flex: 1;
     padding: 0px 20px;
     border-radius: 45px 0px 0px 45px;
-    border: 1px solid grey;    
-
+    border: 6px solid #0c0;    
+    /* box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); */
     font-size: 20px;
-
+    /* box-shadow: 0px 8px 15px rgb(0, 221, 0, 0.4); */
+    box-shadow: 8px 0px 15px rgba(0, 0, 0, 0.4);
 }
 
 .submit-btn {
@@ -20,13 +22,14 @@ input{
     margin-right: 10px;
     padding: 5px 40px 5px 20px;
     background-color: #0c0;
+    /* box-shadow: 0px 8px 15px rgb(0, 221, 0, 0.4); */
+    box-shadow: 8px 0px px rgba(0, 0, 0, 0.4);
 
     color: #fff;
-    font-weight: bold;
+    /* font-weight: bold; */
     text-align: center;
 
     border-radius: 0px 45px 45px 0px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 
     border: none;
     outline: none;
@@ -61,3 +64,40 @@ input{
     }
   }
 
+  .lds-facebook {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-facebook div {
+    display: inline-block;
+    position: absolute;
+    left: 8px;
+    width: 16px;
+    background: #000;
+    animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  }
+  .lds-facebook div:nth-child(1) {
+    left: 8px;
+    animation-delay: -0.24s;
+  }
+  .lds-facebook div:nth-child(2) {
+    left: 32px;
+    animation-delay: -0.12s;
+  }
+  .lds-facebook div:nth-child(3) {
+    left: 56px;
+    animation-delay: 0;
+  }
+  @keyframes lds-facebook {
+    0% {
+      top: 8px;
+      height: 64px;
+    }
+    50%, 100% {
+      top: 24px;
+      height: 32px;
+    }
+  }
+  
