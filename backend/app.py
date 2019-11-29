@@ -2,6 +2,8 @@ import requests
 import base64
 import os
 import json
+import datetime
+import base64
 from urllib.parse import urlencode
 
 from flask import Flask, redirect, request, make_response, jsonify
@@ -17,6 +19,32 @@ STATIC_BASE_URL = os.getenv("MTP_STATIC_BASE_URL")
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": STATIC_BASE_URL}}, supports_credentials=True)
 app.config['CORS_HEADERS'] = 'Content-Type'
+
+
+def refresh_token_decorator(f):
+    def refresh_token_wrapper():
+        access_token = request.cookies.get("token")
+        resp = make_response()
+        if not access_token:
+            body = {
+                "grant_type": "refresh_token",
+                "refresh_token": request.cookies.get("refresh_token")
+            }
+            headers = {
+                "Authorization": "Basic " + str(base64.b64encode(f"{CLIENT_ID}:{CLIENT_SECRET}".encode("utf-8")), "utf-8")
+            }
+            print(body)
+            print
+            res = requests.post("https://accounts.spotify.com/api/token", data=body, headers=headers)
+            if res.status_code != 200:
+                return "Invalid Authorization code", res.status_code
+    
+            content = json.loads(res.content)
+            access_token = content['access_token']
+            resp.set_cookie("token", content['access_token'], max_age=3600)
+            resp.headers.add('Access-Control-Request-Headers', 'Cookie, Set-Cookie')
+        return f(access_token, resp)
+    return refresh_token_wrapper
 
 
 @app.route('/authorize')
@@ -48,23 +76,29 @@ def token():
     if res.status_code != 200:
         return "Invalid Authorization code", 400
     
-    token = json.loads(res.content)['access_token']
+    content = json.loads(res.content)
     resp = make_response()
-    resp.set_cookie("token", token)
+    resp.set_cookie("token", content['access_token'], max_age=3600)
+    resp.set_cookie("refresh_token", content['refresh_token'])
     resp.headers.add('Access-Control-Request-Headers', 'Cookie, Set-Cookie')
     return resp, 200
 
 
 @app.route('/tracks', methods=['GET'])
-def tracks():
+@refresh_token_decorator
+def tracks(access_token, resp):
     if 'link' in request.args:
         title, track_names = scan_yt(request.args['link'])
         if not track_names:
-            return "Could not find a tracklist for your mix", 400
-        spotify_tracks = get_spotify_tracks(track_names, request.cookies.get('token'))
+            return modify_response(resp, "Could not find a tracklist for your mix", 400), 400
+        spotify_tracks = get_spotify_tracks(track_names, access_token)
         if not spotify_tracks:
-            return "Failed to find tracks on spotify", 400
-        return jsonify({'video_title': title, 'tracks': [t.serialize() for t in spotify_tracks]}), 200
+            return modify_response(resp, "Failed to find tracks on spotify", 400)
+        return modify_response(resp,
+                               json.dumps({'video_title': title, 'tracks': [t.serialize() for t in spotify_tracks]}),
+                               200,
+                               mimetype='application/json')
+    return modify_response(resp, "No link in request", 400)
 
 
 @app.route('/playlist', methods=['POST'])
@@ -77,13 +111,21 @@ def playlist():
 
 
 @app.route('/check_cookie')
-def check():
-    print("My cookie", request.cookies.get('token'))
+def check(msg):
     return request.cookies.get('token')
+
 
 @app.route('/hello')
 def hello():
     return "Hello World"
+
+
+def modify_response(response, data, status_code, mimetype=None):
+    response.data = data
+    response.status_code = status_code
+    if mimetype:
+        response.mimetype = mimetype
+    return response
 
 
 if __name__ == "__main__":
