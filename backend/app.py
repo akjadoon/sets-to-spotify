@@ -7,6 +7,7 @@ import base64
 from urllib.parse import urlencode
 
 import pymongo
+import dns
 from flask import Flask, redirect, request, make_response, jsonify
 from flask_cors import CORS
 
