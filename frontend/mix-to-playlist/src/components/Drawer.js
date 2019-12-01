@@ -61,12 +61,14 @@ class Drawer extends React.Component {
                     break;
                 case "save-playlist":
                     drawerContent = (
-                        <p className="msg">The playlist has been added to your Spotify account.
-                             Please be patient as it can take a few minutes to appear.</p>
+                        <div style={{margin: "10px 0px"}}>
+                            <p className="msg">The playlist has been added to your Spotify account</p>
+                            <p className="msg">Please be patient as it can take a few minutes to appear</p>
+                        </div>
                     )
                     break;
                 case "dont-save-playlist":
-                    drawerContent = (<p className="msg">The playlist was not created.</p>)
+                    drawerContent = (<p className="msg">The playlist was not created</p>)
                     break;
                 default:
                     drawerContent = null;
@@ -85,11 +87,11 @@ class Drawer extends React.Component {
 
 const Track = (props) => (
     <div style={{textAlign: "left", padding: "5px 20px", display: "flex", flexDirection: "column"}}>
-      <p style={{color: "white", fontSize: "17px", lineHeight: "5px"}}>{props.name}</p>
+      <p style={{color: "white", fontSize: "15px",  margin: "0"}}>{props.name}</p>
       <div style={{display: "flex"}}>
-      {props.artists.map((a)=> (
-          <p style={{color: "grey", fontSize: "14px",  lineHeight: "5px"}}>{a}</p>
-      ))}
+      <p style={{color: "grey", fontSize: "14px",  margin: "0"}}>
+        {props.artists.join(" • ")}
+      </p>
       </div>
 
       

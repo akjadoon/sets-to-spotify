@@ -59,7 +59,7 @@ class HomePage extends React.Component {
             loading: false})
         })
       } else {
-        this.setState({inputError: true})
+        this.setState({inputError: true, loading: false})
       }
     }
     handleInputChange = (e) => {

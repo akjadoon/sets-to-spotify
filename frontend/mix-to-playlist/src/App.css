@@ -5,9 +5,12 @@ h3 {
 
 html, body {
   height: 100%;
-  font-family: 'Lato';
+  font-family: 'Lato', Calibri;
 }
 
+button {
+  cursor: pointer;
+}
 
 .wrap {
   height: 100%;
@@ -47,6 +50,7 @@ html, body {
   grid-template-areas:
   "card card card"
   ". button .";
+  margin-bottom: 15px;
 }
 
 .CardContainer {
