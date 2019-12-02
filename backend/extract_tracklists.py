@@ -5,7 +5,7 @@ import time
 from youtube import get_yt_comments, get_yt_video_info
 
 MIN_TRACKS = 5
-
+yt_mobile_regex = r"http(?:s?):\/\/(?:www\.)?youtu.be/(\S*)"
 comment_regexps = {
     "single_track_per_line": [
         (r"\d{1,2}[\.| -—]\W*\d{1,2}:\d{2}:\d{2}\W*\s(.*(?:-|—).*)", "1. (XX:XX:XX) "),
@@ -48,6 +48,10 @@ def scan_yt_description(description):
 
 
 def scan_yt(url):
+    match = regex.match(yt_mobile_regex, url)
+    if match:
+        url = f"https://youtube.com/watch?v={match.group(1)}"
+
     tracklist = scan_yt_comments(url)
     title, description = get_yt_video_info(url)
     if not tracklist:
