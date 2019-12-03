@@ -6,7 +6,7 @@ from youtube import get_yt_comments, get_yt_video_info
 
 MIN_TRACKS = 5
 yt_mobile_regex = r"http(?:s?):\/\/(?:www\.)?youtu.be/(\S*)"
-contains_tracklist_regex = r"tracklist[^\n]*\n"
+contains_tracklist_regex = r"(?:tracklist|track list|tracks)[^\n]*\n"
 
 comment_regexps = {
     "single_track_per_line": [
@@ -52,6 +52,7 @@ def scan_yt_description(description):
 
     try:
         _, tracklist_text = regex.split(contains_tracklist_regex, description, flags=regex.IGNORECASE)
+        print("contains track list")
         tracklist = match(tracklist_text, comment_regexps["single_track_per_line_description_only"], regex.MULTILINE)
     except ValueError:
         print("No Tracklist in description")
