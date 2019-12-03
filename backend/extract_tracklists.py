@@ -6,6 +6,8 @@ from youtube import get_yt_comments, get_yt_video_info
 
 MIN_TRACKS = 5
 yt_mobile_regex = r"http(?:s?):\/\/(?:www\.)?youtu.be/(\S*)"
+contains_tracklist_regex = r"tracklist[^\n]*\n"
+
 comment_regexps = {
     "single_track_per_line": [
         (r"\d{1,2}[\.| -—]\W*\d{1,2}:\d{2}:\d{2}\W*\s(.*(?:-|—).*)", "1. (XX:XX:XX) "),
@@ -24,6 +26,9 @@ comment_regexps = {
     "single_track_multi_line": [
         (r"^[\[\(]?\d{1,2}:\d{2}:\d{2}[\]\)]?\W*\n(.*)\n", "(00:00:00)\n"),
         (r"^[\[\(]?\d{1,2}:\d{2}[\]\)]?\W*\n(.*)\n", "(00:00)\n"),
+    ],
+    "single_track_per_line_description_only": [
+        (r"^([^-\n]* - [^-\n]*)(?: - (?:[^-\n]*))?\n", "The tracklist:\n")
     ]
 }
 
@@ -42,9 +47,19 @@ def scan_yt_comments(url):
 
 def scan_yt_description(description):
     tracklist = find_multi_line_tracklist(description)
-    if not tracklist:
-        print("Tracklist not found in description")
-    return tracklist
+    if tracklist:
+        return tracklist
+
+    try:
+        _, tracklist_text = regex.split(contains_tracklist_regex, description, flags=regex.IGNORECASE)
+        tracklist = match(tracklist_text, comment_regexps["single_track_per_line_description_only"], regex.MULTILINE)
+    except ValueError:
+        print("No Tracklist in description")
+        pass
+    if tracklist:
+        return tracklist
+
+    return None
 
 
 def scan_yt(url):
@@ -85,19 +100,25 @@ def find_single_line_tracklist(comment):
     return None
  
 
-def find_multi_line_tracklist(comment):
+def find_multi_line_tracklist(comment, regexps=None):
     for pattern, _ in comment_regexps["single_track_per_line"]:
         matches = regex.findall(pattern, comment)
         if len(matches) > MIN_TRACKS:
-            print(pattern)
             return matches
 
     for pattern, _ in comment_regexps["single_track_multi_line"]:
         matches = regex.findall(pattern, comment)
         if len(matches) > MIN_TRACKS:
             return matches
+
     return None
 
+def match(comment, regexps, flags):
+    for pattern, _ in regexps:
+        matches = regex.findall(pattern, comment, flags=flags)
+        if len(matches) > MIN_TRACKS:
+            return matches
+    return None
 
 if __name__ == "__main__":
     print(scan_yt("https://www.youtube.com/watch?v=AJvCnFqSViA&t=742s"))
